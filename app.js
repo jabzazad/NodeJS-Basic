@@ -1,8 +1,14 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 const port = process.env.Port||3000
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+if(app.get('env')==='development'){
+    app.use(morgan('dev'))
+}
+
+
 app.get('/',(req,res)=>{
     res.send("Hello World")
 })
@@ -29,7 +35,6 @@ app.post('/message',function (req,res){
     console.log(req.body)
     res.send('Got a POST request')
 })
-
 
 app.listen(port,()=>{
  console.log(`Server listen on port ${port}`)
