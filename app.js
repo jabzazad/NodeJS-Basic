@@ -13,7 +13,16 @@ res.send('Got a PUT request at /user')
 })
 app.delete('/user',function(req,res){
     res.send('Got a DELETE request at /user')
-    
+})
+app.get('/greeting/:name',(req,res)=>{
+    console.log(req.params)
+    const {name}=req.params
+    res.send(`Hello ${name}`)
+})
+app.get('/greeting/',(req,res)=>{
+console.log(req.query)
+const {name}=req.query
+res.send(`Hello ${name}`)
 })
 app.listen(port,()=>{
  console.log(`Server listen on port ${port}`)
